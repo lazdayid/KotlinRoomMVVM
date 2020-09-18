@@ -87,9 +87,8 @@ class MainActivity : AppCompatActivity() {
             setPositiveButton("Hapus") { dialogInterface, i ->
                 CoroutineScope(GlobalScope.coroutineContext).launch {
                     db.noteDao().deleteNote(note)
-                    finish()
+                    dialogInterface.dismiss()
                 }
-                dialogInterface.dismiss()
             }
             setNegativeButton("Batal") { dialogInterface, i ->
                 dialogInterface.dismiss()
