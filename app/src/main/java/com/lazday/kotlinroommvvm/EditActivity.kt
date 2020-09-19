@@ -7,6 +7,7 @@ import com.lazday.kotlinroommvvm.room.Note
 import com.lazday.kotlinroommvvm.room.NoteDB
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -47,12 +48,12 @@ class EditActivity : AppCompatActivity() {
 
     private fun setupLstener(){
         button_save.setOnClickListener {
-            CoroutineScope(GlobalScope.coroutineContext).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 db.noteDao().addNote(
                     Note(
                         0,
-                        "Judul",
-                        "Catatan"
+                        edit_title.text.toString(),
+                        edit_note.text.toString()
                     )
                 )
                 finish()
