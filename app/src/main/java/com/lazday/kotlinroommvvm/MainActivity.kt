@@ -85,8 +85,8 @@ class MainActivity : AppCompatActivity() {
     fun deleteAlert(note: Note){
         val dialog = AlertDialog.Builder(this)
         dialog.apply {
-            title = "Konfirmasi Hapus"
-            setMessage("Hapus ${note.title}?")
+            setTitle("Konfirmasi Hapus")
+            setMessage("Yakin hapus ${note.title}?")
             setNegativeButton("Batal") { dialogInterface, i ->
                 dialogInterface.dismiss()
             }

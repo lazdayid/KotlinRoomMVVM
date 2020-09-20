@@ -8,7 +8,6 @@ import com.lazday.kotlinroommvvm.room.NoteDB
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class EditActivity : AppCompatActivity() {
@@ -60,7 +59,7 @@ class EditActivity : AppCompatActivity() {
             }
         }
         button_update.setOnClickListener {
-            CoroutineScope(GlobalScope.coroutineContext).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 db.noteDao().updateNote(
                     Note(
                         noteId,
@@ -75,9 +74,10 @@ class EditActivity : AppCompatActivity() {
 
     private fun setNote(){
         noteId = intent.getIntExtra("note_id", 0)
-        CoroutineScope(GlobalScope.coroutineContext).launch {
-            edit_title.setText( db.noteDao().getNote(noteId).get(0).title )
-            edit_note.setText( db.noteDao().getNote(noteId).get(0).note )
+        CoroutineScope(Dispatchers.IO).launch {
+            val notes = db.noteDao().getNote(noteId).get(0)
+            edit_title.setText( notes.title )
+            edit_note.setText( notes.note )
         }
     }
 
