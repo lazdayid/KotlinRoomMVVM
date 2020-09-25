@@ -1,8 +1,10 @@
-package com.lazday.kotlinroommvvm
+package com.lazday.kotlinroommvvm.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.lazday.kotlinroommvvm.R
+import com.lazday.kotlinroommvvm.room.Constant
 import com.lazday.kotlinroommvvm.room.Note
 import com.lazday.kotlinroommvvm.room.NoteDB
 import kotlinx.android.synthetic.main.activity_edit.*
@@ -34,13 +36,13 @@ class EditActivity : AppCompatActivity() {
                 supportActionBar!!.title = "BACA"
                 button_save.visibility = View.GONE
                 button_update.visibility = View.GONE
-                setNote()
+                getNote()
             }
             Constant.TYPE_UPDATE -> {
                 supportActionBar!!.title = "EDIT"
                 button_save.visibility = View.GONE
                 button_update.visibility = View.VISIBLE
-                setNote()
+                getNote()
             }
         }
     }
@@ -72,7 +74,7 @@ class EditActivity : AppCompatActivity() {
         }
     }
 
-    private fun setNote(){
+    private fun getNote(){
         noteId = intent.getIntExtra("note_id", 0)
         CoroutineScope(Dispatchers.IO).launch {
             val notes = db.noteDao().getNote(noteId).get(0)
@@ -86,7 +88,7 @@ class EditActivity : AppCompatActivity() {
         return super.onSupportNavigateUp()
     }
 
-    fun intentType(): Int {
+    private fun intentType(): Int {
         return intent.getIntExtra("intent_type", 0)
     }
 }

@@ -1,4 +1,4 @@
-package com.lazday.kotlinroommvvm
+package com.lazday.kotlinroommvvm.room
 
 class Constant {
     companion object {

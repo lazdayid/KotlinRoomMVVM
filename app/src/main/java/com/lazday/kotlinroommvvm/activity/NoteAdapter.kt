@@ -1,9 +1,10 @@
-package com.lazday.kotlinroommvvm
+package com.lazday.kotlinroommvvm.activity
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.lazday.kotlinroommvvm.R
 import com.lazday.kotlinroommvvm.room.Note
 import kotlinx.android.synthetic.main.adapter_main.view.*
 
@@ -13,7 +14,11 @@ class NoteAdapter (var notes: ArrayList<Note>, var listener: OnAdapterListener) 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.adapter_main, parent, false)
+                .inflate(
+                    R.layout.adapter_main,
+                    parent,
+                    false
+                )
         )
     }
 
@@ -38,7 +43,6 @@ class NoteAdapter (var notes: ArrayList<Note>, var listener: OnAdapterListener) 
     fun setData(newList: List<Note>) {
         notes.clear()
         notes.addAll(newList)
-//        notifyDataSetChanged()
     }
 
     interface OnAdapterListener {
